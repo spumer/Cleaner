@@ -40,12 +40,15 @@
 /* Basic information exposed publicly */
 #define SMEXT_CONF_NAME			"Console Cleaner"
 #define SMEXT_CONF_DESCRIPTION	"Console warning suppressor"
-#define SMEXT_CONF_VERSION		"1.1.0"
+#define SMEXT_CONF_VERSION		"1.1.1"
 #define SMEXT_CONF_AUTHOR		"Zephyrus, Accelerator"
 #define SMEXT_CONF_URL			"https://github.com/Accelerator74/Cleaner"
 #define SMEXT_CONF_LOGTAG		"Cleaner"
 #define SMEXT_CONF_LICENSE		"GPLv3"
 #define SMEXT_CONF_DATESTRING	__DATE__
+
+#define GAMEDATA_FILE			"cleaner"
+#define PLUGIN_LOG_PREFIX		"[" SMEXT_CONF_LOGTAG "] "
 
 /** 
  * @brief Exposes plugin's main interface.
@@ -56,7 +59,7 @@
  * @brief Sets whether or not this plugin required Metamod.
  * NOTE: Uncomment to enable, comment to disable.
  */
-//#define SMEXT_CONF_METAMOD		
+#define SMEXT_CONF_METAMOD
 
 /** Enable interfaces you want to use here by uncommenting lines */
 //#define SMEXT_ENABLE_FORWARDSYS

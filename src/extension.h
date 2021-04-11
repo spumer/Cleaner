@@ -37,9 +37,12 @@
  * @brief Sample extension code header.
  */
 
-#include "smsdk_ext.h"
+#include "smsdk/smsdk_ext.h"
 #include "CDetour/detours.h"
 #include <tier0/dbg.h>
+
+
+extern ISmmAPI *g_pSmmAPI;
 
 //HalfLife2.h
 #if defined _WIN32
@@ -68,12 +71,23 @@
 
 typedef void * gpointer;
 
+#ifndef DETOUR_DECL_STATIC2
+#define DETOUR_DECL_STATIC2(name, ret, p1type, p1name, p2type, p2name) \
+ret (*name##_Actual)(p1type, p2type) = NULL; \
+ret name(p1type p1name, p2type p2name)
+#endif
+
 /**
  * @brief Sample implementation of the SDK Extension.
  * Note: Uncomment one of the pre-defined virtual functions in order to use it.
  */
 class Cleaner : public SDKExtension
 {
+private:
+	bool SetupFromGameConfig(IGameConfig* game_conf, char* error, int maxlength);
+	bool CreateDetours(char* error, size_t maxlength);
+	bool LoadCleanPhrases(char* error, size_t maxlength);
+
 public:
 	/**
 	 * @brief This is called after the initial loading sequence has been processed.
@@ -119,7 +133,7 @@ public:
 	 * @param late			Whether or not Metamod considers this a late load.
 	 * @return				True to succeed, false to fail.
 	 */
-	//virtual bool SDK_OnMetamodLoad(ISmmAPI *ismm, char *error, size_t maxlength, bool late);
+	virtual bool SDK_OnMetamodLoad(ISmmAPI *ismm, char *error, size_t maxlength, bool late);
 
 	/**
 	 * @brief Called when Metamod is detaching, after the extension version is called.
@@ -129,7 +143,7 @@ public:
 	 * @param maxlength		Maximum size of error buffer.
 	 * @return				True to succeed, false to fail.
 	 */
-	//virtual bool SDK_OnMetamodUnload(char *error, size_t maxlength);
+	virtual bool SDK_OnMetamodUnload(char *error, size_t maxlength);
 
 	/**
 	 * @brief Called when Metamod's pause state is changing.
@@ -143,5 +157,7 @@ public:
 	//virtual bool SDK_OnMetamodPauseChange(bool paused, char *error, size_t maxlength);
 #endif
 };
+
+size_t UTIL_DecodeHexString(unsigned char *buffer, size_t maxlength, const char *hexstr);
 
 #endif // _INCLUDE_SOURCEMOD_EXTENSION_PROPER_H_
