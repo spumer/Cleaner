@@ -17,6 +17,7 @@ folder_list = [
     'addons',
     'addons/sourcemod/extensions',
     'addons/sourcemod/gamedata',
+    'addons/sourcemod/configs',
 ]
 
 # Create the distribution folder hierarchy
@@ -40,5 +41,10 @@ def CopyFiles(src, dest, files):
 for cxx_task in build_info.extensions:
     builder.AddCopy(cxx_task.binary, folder_map['addons/sourcemod/extensions'])
 
+CopyFiles('sourcemod/extensions', 'addons/sourcemod/extensions', ['cleaner.autoload'])
+
 # Gamedata file
 CopyFiles('sourcemod/gamedata', 'addons/sourcemod/gamedata', ['cleaner.txt'])
+
+# Config file
+CopyFiles('sourcemod/configs', 'addons/sourcemod/configs', ['cleaner.cfg'])
