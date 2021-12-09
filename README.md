@@ -6,8 +6,7 @@ different types of spam messages that are normal, but provide no useful info.
 
 ## Installation
 
-1. Choose the correct .dll (Windows) or .so (linux) file from the [Release](https://github.com/spumer/Cleaner/releases) page
-   or download latest build from [Build Workflows](https://github.com/spumer/Cleaner/actions)
-2. Download and put it into your servers `addons/sourcemod/extensions` folder.
+1. Go to [page](https://nightly.link/spumer/Cleaner/workflows/build.yml/master) and choose the build for your platform (win/linux)
+2. Download and put .dll or .so files into your servers `addons/sourcemod/extensions` folder.
 3. Copy the contents of the `sourcemod` folder into your servers sourcemod folder.
 4. (Optional) Modify `addons/sourcemod/configs/cleaner.cfg` with more strings you want removed
